@@ -82,3 +82,15 @@ const initialState = {
   initialState
 );
 ```
+
+## useSafeEffect
+
+runs useEffect when window is undefined and useLayoutEffect when window is not undefined.
+
+## useSafeCallback
+
+useCallback that runs only when mounted and takes no dependencies.
+
+## useSafeReducer
+
+useReducer but the dispatch runs only when mounted.
