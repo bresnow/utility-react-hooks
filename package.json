@@ -1,6 +1,6 @@
 {
   "name": "bresnow_utility-react-hooks",
-  "version": "0.1.35",
+  "version": "0.1.4",
   "main": "./build/index.js",
   "license": "MIT",
   "scripts": {
