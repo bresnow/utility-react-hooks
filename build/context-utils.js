@@ -44,8 +44,7 @@ var react_1 = __importDefault(require("react"));
 );
 
  */
-function useContextReducer(reducer, initialState, options) {
-    var _a;
+function useContextReducer(reducer, initialState) {
     var defaultDispatch = function () { return initialState; };
     var stateCtx = react_1["default"].createContext(initialState);
     var dispatchCtx = react_1["default"].createContext(defaultDispatch);
@@ -69,7 +68,6 @@ function useContextReducer(reducer, initialState, options) {
         return (react_1["default"].createElement(dispatchCtx.Provider, { value: dispatch },
             react_1["default"].createElement(stateCtx.Provider, { value: state }, children)));
     }
-    Provider.displayName = (_a = options === null || options === void 0 ? void 0 : options.displayName) !== null && _a !== void 0 ? _a : options === null || options === void 0 ? void 0 : options.displayName;
     return [useStateCtx, useDispatchCtx, Provider];
 }
 exports.useContextReducer = useContextReducer;
