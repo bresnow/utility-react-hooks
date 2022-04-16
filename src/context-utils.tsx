@@ -41,8 +41,7 @@ import React from "react";
 
 export function useContextReducer<StateType, ActionType>(
   reducer: React.Reducer<StateType, ActionType>,
-  initialState: StateType,
-  options?: { displayName: string }
+  initialState: StateType
 ) {
   const defaultDispatch: React.Dispatch<ActionType> = () => initialState;
   const stateCtx = React.createContext(initialState);
@@ -74,8 +73,6 @@ export function useContextReducer<StateType, ActionType>(
       </dispatchCtx.Provider>
     );
   }
-
-  Provider.displayName = options?.displayName ?? options?.displayName;
 
   return [useStateCtx, useDispatchCtx, Provider] as const;
 }
