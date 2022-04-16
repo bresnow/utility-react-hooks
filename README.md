@@ -1,6 +1,6 @@
 # bresnow_utility-react-hooks
 
-Custom react hooks I have built and use regularly. Docs soon.
+Custom react hooks I have built and use regularly.
 
 ![Image](./img/hooksIndex.png)
 
@@ -10,9 +10,9 @@ yarn add bresnow_utility-react-hooks
 
 ## useConsole
 
-  Hook to use console.log only if NODE_ENV === 'development'
+  Hook to use console.log only if NODE_ENV === 'development'.
   Naming the function to something shorter like "_" is a good idea for speed and when removing from the code...
-  assert, info, log, warn and error have a ```trace()``` method to print the location in code.
+  _.assert, _.info, _.log, _.warn, and _.error have a ```trace()``` method to print the location in code.
 
 ```javascript
   import { useConsole } from "bresnow_utility-react-hooks";
@@ -25,7 +25,7 @@ yarn add bresnow_utility-react-hooks
 ## useIf
 
  If statement hook that returns statement if condition is true. Useful when a normal if statement is causing infinite render errors. Conditions are listed as an array dependencies and eliminates the need for && operators.
- Optional else callback parameter to run when condition is false. **Runs on every render.**
+ Optional else callback parameter to run when condition is false. **Note: else option runs on every render the conditions !== true.**
 
  ```javascript  
  {else: ()=>void }
@@ -36,10 +36,14 @@ import { useIf } from "bresnow_utility-react-hooks";
 
  useIf( [auth?.keys ],
   () => {
+
   nodepathSet(`~${auth.keys?.pub}.${path}`);
+
   }, { else: 
   () => {
+
       log("condition is still not true");
+
   }});
 
   log(nodepath, "nodepath");   
