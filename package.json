@@ -1,9 +1,8 @@
 {
-  "name": "@bresnow/utility-react-hooks",
-  "version": "0.1.0",
+  "name": "bresnow_utility-react-hooks",
+  "version": "0.1.2",
   "main": "build/index.js",
-  "private": false,
-  "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License",
+  "license": "MIT",
   "scripts": {
     "build": "tsc ./src/index.ts --esModuleInterop --jsx react --outDir build"
   },
