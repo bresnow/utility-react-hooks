@@ -81,7 +81,7 @@ const initialState = {
   }
   
 
-  const [useCartState, useCartDispatch, CartProvider] = createCtxWithReducer(
+  const [useCartState, useCartDispatch, CartProvider] = useContextReducer(
   cartReducer,
   initialState
 );
