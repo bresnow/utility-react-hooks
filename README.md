@@ -34,7 +34,7 @@ yarn add bresnow_utility-react-hooks
 ```javascript
 import { useIf } from "bresnow_utility-react-hooks";
 
- useIf( [auth?.keys ],
+ useIf( [auth.keys, auth.isLoggedIn === true ],
   () => {
 
   nodepathSet(`~${auth.keys?.pub}.${path}`);
