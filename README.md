@@ -42,7 +42,7 @@ import { useIf } from "bresnow_utility-react-hooks";
 Create contexts and providers as if using "useReducer".
 
 ``` javascript
-import { useContextReducer } from "bresnow_utility-react-hooks/context-utils";
+import { useContextReducer } from "bresnow_utility-react-hooks";
 
 const initialState = {
   hidden: true,
