@@ -1,10 +1,10 @@
 {
-  "name": "@nekogd/react-hook-npm-publish-boilerplate",
-  "version": "0.0.0",
+  "name": "bresnow_utility-react-hooks",
+  "version": "0.2.2",
   "description": "Modular utility hooks that we often use grouped in one package. Written in TypeScript, documented, tested and maintained.Disclaimer: at least React 16 is needed (the one with hooks ;) )",
-  "author": "nekogd",
+  "author": "bresnow",
   "license": "Apache-2.0",
-  "repository": "nekogd/react-hook-npm-publish-boilerplate",
+  "repository": "https://github.com/bresnow/utility-hooks",
   "main": "dist/index.js",
   "engines": {
     "node": ">=8",
@@ -36,14 +36,14 @@
   "devDependencies": {
     "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^26.0.7",
-    "@types/react": "^16.3.13",
-    "@types/react-dom": "^16.0.5",
+    "@types/react": "18",
+    "@types/react-dom": "18",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "eslint-plugin-react-hooks": "^4.0.8",
     "jest": "^26.1.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "18",
+    "react-dom": "18",
     "react-test-renderer": "^16.13.1",
     "rollup": "^1.29.0",
     "rollup-plugin-sass": "^1.2.2",
@@ -57,11 +57,22 @@
   ],
   "keywords": [
     "react",
-    "react hooks",
-    "typescript",
-    "npm"
+    "hooks",
+    "utility",
+    "bresnow",
+    "useIf",
+    "useLZ",
+    "object",
+    "compression",
+    "lz-object",
+    "lzma",
+    "lz-string",
+    "utf-16",
+    "base64",
+    "uint8array"
   ],
   "dependencies": {
+    "lz-object": "^0.1.7",
     "prop-types": "^15.7.2"
   }
 }

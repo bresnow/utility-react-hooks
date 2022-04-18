@@ -1,161 +1,89 @@
-# React Hooks to npm boilerplate
+# bresnow_utility-react-hooks
 
-This repository is a boilerplate for creating custom React hooks and components that we can publish to NPM registry as packages.
+Custom react hooks I have built and use regularly.
 
-I've put together a quick tutorial, it assumes an understanding of React, hooks and unit tests.
+![Image](./img/hooksIndex.png)
 
-If something is not clear, message me or raise an issue, I will explain in more detail.
-
-I've used this boilerplate to create my NPM package [https://www.npmjs.com/package/@nekogd/react-utility-hooks].
-
-## First things first
-
-Firstly, clone this repository. 
-
-Next, go over to package.json file and amend name, description and author keys.
-
-The package would be served on npm as per what you have typed in the "name".
-
-You may want to use scoped naming i.e. "@myscope/use-my-hook"
-
-More info: [https://docs.npmjs.com/using-npm/scope.html]
-
-## How we will be able to use your package
-
-It follows the common React path.
-
-Follow through the included useCounter example and you will be fine.
-
-Make sure to export your hook (I prefer named exports) in index.ts.
-
-Basically you have to do three things:
-
-a) write your hook (preferably test and type it)
-
-b) export it in index.ts file
-
-c) deploy to NPM
-
-We will able to use your hook like so:
-
-```
- import { useYourHook } from 'your-package-name'
+```terminal
+yarn add bresnow_utility-react-hooks
 ```
 
-## Development commands
+## useIf
 
-```
- // watch
- yarn start
+ If statement hook that returns statement if condition is true. Useful when a normal if statement is causing infinite render errors. Conditions are listed as an array dependencies and eliminates the need for && operators.
+ Optional else callback parameter to run when condition is false. **Note: else option runs on every render the conditions !== true.**
 
- // or
- npm run start
-```
+ ```javascript  
+ {else: ()=>void }
+ ```
 
-```
- // builds the dist folder
- yarn build
+```javascript
+import { useIf } from "bresnow_utility-react-hooks";
 
- // or
- npm run build
-```
+ useIf( [auth.keys, auth.isLoggedIn === true ],
+  () => {
 
-```
- // starts tests
- yarn test
+  nodepathSet(`~${auth.keys?.pub}.${path}`);
 
- // or
+  }, { else: 
+  () => {
 
- npm run test
-```
+      log("condition is still not true");
 
-## Local testing and yarn link
+  }});
 
-To locally test the package, do the following:
-
-Let's assume your package name is "use-my-counter" and your CRA is "my-app".
-
-Let's also assume they are in one workspace.
-
-```
-workspace
-  - use-my-counter
-  - my-app
+  log(nodepath, "nodepath");   
+  //  ['~YQus5nDLVi5PG5BJXGTLoizIWbnrNN9NRER3-0RbqV0.eaV67IswAG3zCf5C5qqR7mF7EwgfmqIsjgf1MDhSNPA.pages.index', 'nodepath']
 ```
 
-a) in hook folder, run
-```
-yarn link
-```
-b) assuming you have a workspace, create a sample CRA app 
-```
-npx create-react-app my-app
-```
-c) navigate to your CRA app folder
-```
-cd my-app
-```
-d) run command
-```
- yarn link use-my-counter
-```
-e)  In your CRA app, you can now user package, as it's linked locally 
-```
-  import { useMyCounter } from 'use-my-counter';
-```
 
-f) However, this will give you an error due to different copy of React and in CRA app. 
-   To counter that let's assume that we have workspace
-```
-workspace
-  - use-my-counter
-  - my-app
-```
-  We navigate to use-my-counter and type (this will link the React versions locally). 
+## useContextReducer
+
+Create contexts and providers as if using "useReducer".
+
+``` javascript
+import { useContextReducer } from "bresnow_utility-react-hooks/context-utils";
+
+const initialState = {
+  hidden: true,
+  cartItems: [],
+  address: null,
+};
+
+  function cartReducer(state: State, action: Action): State {
+  console.log(state, 'context state');
+
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return {
+        ...state,
+        cartItems: addItemToCart(state.cartItems, action.payload),
+      };
+    case 'CLEAR_CART':
+      return {
+        ...state,
+        cartItems: [],
+      };
+    default: {
+       throw new Error(`Unhandled action type: ${action.type}`);
+     }
+  }
   
-  Please amend the path to your needs.
-  ```
-   npm link ../my-app/node_modules/react
-  ```
-  We should be good to go to work locally. 
 
-## Deployment to NPM
-
-### Login to correct NPM account
-
-```
-npm login
+  const [useCartState, useCartDispatch, CartProvider] = useContextReducer(
+  cartReducer,
+  initialState
+);
 ```
 
-### Versioning
+## useSafeEffect
 
-Increase the version number as per NPM guides [https://docs.npmjs.com/about-semantic-versioning].
+runs useEffect when window is undefined and useLayoutEffect when window is not undefined.
 
-```
-// increases the first digit i.e. from 0.5.4 to 1.0.0
-npm version major
+## useSafeCallback
 
-// increases the second digit i.e. from 0.0.3 to 0.1.0
-npm version minor
+useCallback that runs only when mounted and takes no dependencies.
 
-// increases the third digit i.e. from 0.0.1 to 0.0.2
-npm version patch
-```
+## useSafeReducer
 
-### Deployment
-
-Run the command and the package should be up.
-
-```
-npm publish --access public
-```
-
-### What If I want to export a component? 
-
-You can do that too, following same pattern as you'd with hooks.
-
-Bear in mind you'd propably need .tsx file and not .ts.
-
-### Share with the world
-
-Share your work and learnings with the world! :)
+useReducer but the dispatch runs only when mounted.
