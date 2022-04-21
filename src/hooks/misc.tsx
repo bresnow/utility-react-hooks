@@ -43,3 +43,23 @@ export function useDebounce(
   useSafeEffect(reset, [...dependencies, reset]);
   useSafeEffect(clear, []);
 }
+
+export function useEventListener(
+  eventType: string,
+  callback: (e: any) => void,
+  element = window,
+) {
+  const callbackRef = React.useRef(callback);
+
+  useSafeEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
+  useSafeEffect(() => {
+    if (element == null) return;
+    const handler = (e: Event) => callbackRef.current(e);
+    element.addEventListener(eventType, handler);
+
+    return () => element.removeEventListener(eventType, handler);
+  }, [eventType, element]);
+}
