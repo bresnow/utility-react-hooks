@@ -1,6 +1,6 @@
-import { useSafeCallback, useSafeEffect } from "./useSafe";
+import { useSafeCallback, useSafeEffect } from './useSafe';
 
-const noop = () => { };
+const noop = () => {};
 
 /**
  * @abstract -  If statement hook that returns statement if condition is true
@@ -18,27 +18,27 @@ const noop = () => { };
  * ``````````````````````````````
  */
 export function useIf<ReturnValue = any>(
-    conditions: any[],
-    statementCallback: () => ReturnValue,
-    opts?: { else: () => void }
-) {
-    // Csallback function that returns the condition statement
-    let memo = useSafeCallback(statementCallback);
+  conditions: any[],
+  statementCallback: () => ReturnValue,
+  opts?: { else: () => void },
+): asserts conditions is true[] {
+  // Csallback function that returns the condition statement
+  let memo = useSafeCallback(statementCallback);
 
-    // iff mounted we'll loop through the condition dependencies to check for falsy values
-    useSafeEffect(() => {
-        for (let i = 0; i < conditions.length; i++) {
-            if (
-                conditions[i] === false ||
-                conditions[i] === null ||
-                typeof conditions[i] === "undefined"
-            ) {
-                return opts?.else ? opts.else : noop(); // cleanup function as an else statement
-            }
-        }
-        // if condition is true make a statement
-        memo();
-    }, [conditions]);
+  // iff mounted we'll loop through the condition dependencies to check for falsy values
+  useSafeEffect(() => {
+    for (let i = 0; i < conditions.length; i++) {
+      if (
+        conditions[i] === false ||
+        conditions[i] === null ||
+        typeof conditions[i] === 'undefined'
+      ) {
+        return opts?.else ? opts.else : noop(); // cleanup function as an else statement
+      }
+    }
+    // if condition is true make a statement
+    memo();
+  }, [conditions]);
 }
 
-// Rule the world 
+// Rule the world
